@@ -136,7 +136,14 @@ class DoublyLinkedList {
 
     void pop_back(){
         Node * temp = tail;
-        
+
+        tail = tail->prev;
+
+        if(tail){
+            tail->next=nullptr;
+        } else {
+            head = nullptr;
+        }
     }
 
     void print() {
@@ -175,6 +182,23 @@ int main() {
     list.print();
     cout << "List backward: ";
     list.print_reverse();
+
+    cout << "\ndelete_val():\n";
+    list.delete_val(50);
+    cout << "After deleting value 50: ";
+    list.print();
+
+    cout << "\ndelete_pos():\n";
+    list.delete_pos(0);
+    cout << "After deleting position 0: ";
+    list.print();
+
+    cout << "\npop_front():\n";
+    list.pop_front();
+    cout << "After pop_front(): ";
+    list.print();
+
+
     cout << "Deleting list, then trying to print.\n";
     list.~DoublyLinkedList();
     cout << "List forward: ";
