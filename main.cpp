@@ -59,8 +59,7 @@ class DoublyLinkedList {
         for (int i = 0; i < position && temp; ++i)
             temp = temp -> next;
         if (!temp) {
-            cout << "Position exceeds list size. Node not inserted.\n";
-            delete newNode;
+            cout << "Position exceeds list size." << endl;
             return;
         }
         newNode -> next = temp -> next;
@@ -211,7 +210,6 @@ int main() {
     list.print_reverse();
 
     cout << "Deleting list, then trying to print.\n";
-    list.~DoublyLinkedList();
     cout << "List forward: ";
     list.print();
     return 0;
