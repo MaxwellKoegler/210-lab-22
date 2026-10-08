@@ -90,7 +90,7 @@ class DoublyLinkedList {
         delete temp;
     }
 
-    void delete_pose(int position){
+    void delete_pos(int position){
         if(!head) return;
         if(position < 0) {
             cout << "Position must be > 0." << endl;
@@ -98,6 +98,45 @@ class DoublyLinkedList {
         }
 
         Node *temp = head;
+
+        for(int i = 0; i < position && temp; ++i) {
+            temp = temp->next;
+        }
+
+        if(!temp) {
+            cout << "Position exceeds list size." << endl;
+        }
+
+        if(temp->prev) {
+            temp->prev->next = temp->next;
+    
+        } else  {
+            head = temp->next;
+        }
+
+        if (temp->next) {
+            temp->next->prev = temp->prev;
+
+        } else {
+            tail = temp->prev; // Deleting the tail
+        }
+    }
+
+    void pop_front(){
+
+        Node * temp = head;
+        head = head->next;
+
+        if(head){
+            head->prev = nullptr;
+        } else {
+            tail = nullptr;
+        }
+    }
+
+    void pop_back(){
+        Node * temp = tail;
+        
     }
 
     void print() {
