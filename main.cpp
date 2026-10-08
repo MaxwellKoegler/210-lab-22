@@ -90,60 +90,64 @@ class DoublyLinkedList {
         delete temp;
     }
 
-    void delete_pos(int position){
-        if(!head) return;
-        if(position < 0) {
+    void delete_pos(int position) {
+        if (!head) return;
+        if (position < 0) {
             cout << "Position must be > 0." << endl;
             return;
         }
 
-        Node *temp = head;
+        Node * temp = head;
 
-        for(int i = 0; i < position && temp; ++i) {
-            temp = temp->next;
+        for (int i = 0; i < position && temp; ++i) {
+            temp = temp -> next;
         }
 
-        if(!temp) {
+        if (!temp) {
             cout << "Position exceeds list size." << endl;
         }
 
-        if(temp->prev) {
-            temp->prev->next = temp->next;
-    
-        } else  {
-            head = temp->next;
-        }
-
-        if (temp->next) {
-            temp->next->prev = temp->prev;
+        if (temp -> prev) {
+            temp -> prev -> next = temp -> next;
 
         } else {
-            tail = temp->prev; // Deleting the tail
+            head = temp -> next;
         }
+
+        if (temp -> next) {
+            temp -> next -> prev = temp -> prev;
+
+        } else {
+            tail = temp -> prev; // Deleting the tail
+        }
+
+        delete temp;
     }
 
-    void pop_front(){
+    void pop_front() {
 
         Node * temp = head;
-        head = head->next;
+        head = head -> next;
 
-        if(head){
-            head->prev = nullptr;
+        if (head) {
+            head -> prev = nullptr;
         } else {
             tail = nullptr;
         }
+        delete temp;
     }
 
-    void pop_back(){
+    void pop_back() {
         Node * temp = tail;
 
-        tail = tail->prev;
+        tail = tail -> prev;
 
-        if(tail){
-            tail->next=nullptr;
+        if (tail) {
+            tail -> next = nullptr;
         } else {
             head = nullptr;
         }
+        delete temp;
     }
 
     void print() {
@@ -198,6 +202,13 @@ int main() {
     cout << "After pop_front(): ";
     list.print();
 
+    cout << "\npop_back():\n";
+    list.pop_back();
+    cout << "After pop_back(): ";
+    list.print();
+
+    cout << "\nList backward: ";
+    list.print_reverse();
 
     cout << "Deleting list, then trying to print.\n";
     list.~DoublyLinkedList();
